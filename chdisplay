@@ -1,0 +1,22 @@
+#!/bin/sh
+
+turn_on_both() {
+    xrandr --output DVI-D-0 --primary --mode 1920x1080 --rate 144 --auto --output HDMI-0 --auto --right-of DVI-D-0
+}
+
+turn_on_right() {
+    xrandr --output DVI-D-0 --off --output HDMI-0 --primary --auto
+}
+
+# Get the hardware model
+hardware_model=$(hostnamectl | rg "Hardware Model" | cut -c21-)
+
+if [ "$hardware_model" = "HP Desktop M01-F1xxx" ]; then
+    if xrandr | rg -q "HDMI-0 connected primary"; then
+        turn_on_both
+    else
+        turn_on_right
+    fi
+else
+    echo "Unknown model: $hardware_model"
+fi

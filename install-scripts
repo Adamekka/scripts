@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Check for root privileges
+if [ "$EUID" -ne 0 ]; then
+    echo "Please run as root"
+    exit
+fi
+
+scripts=()
+for file in *; do
+    if [ "$file" != "install-scripts" ]; then
+        scripts+=("$file")
+    fi
+done
+
+for script in "${scripts[@]}"; do
+    install -Dm755 "$script" /usr/local/bin/
+    echo "installed $script"
+done
