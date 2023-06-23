@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# This checks for your current keyboard layout and then sets the other one
+case $(setxkbmap -query | grep layout | cut -c 13-) in
+us)
+    setxkbmap zz
+    ;;
+zz)
+    setxkbmap us
+    ;;
+esac
