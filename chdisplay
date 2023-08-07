@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 turn_on_both() {
     xrandr --output DVI-D-0 --primary --mode 1920x1080 --rate 144 --auto --output HDMI-0 --auto --right-of DVI-D-0
